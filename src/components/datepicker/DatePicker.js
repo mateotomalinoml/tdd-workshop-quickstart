@@ -5,9 +5,9 @@ const DatePicker = (props) => {
   return (
     <table>
       <tbody>
-        {
-          weeks.map(() => <tr className="date-picker__week"></tr>)
-        }
+        {weeks.map((week) => <tr className="date-picker__week">
+          {week.map(({ day, month, year }) => <td id={`date-${day}-${month}-${year}`}>{day}</td>)}
+        </tr>)}
       </tbody>
     </table>
   );

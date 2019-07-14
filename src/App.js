@@ -4,7 +4,9 @@ function App() {
   return (
     <div style={{ textAlign: "center", marginTop: "2em" }}>
       Hola ! Bienvenido al workshop de TDD
-     <DatePicker weeks={[[], []]} />
+     <DatePicker weeks={[[{ day: 20, month: 2, year: 2018 }], [
+        { day: 28, month: 2, year: 2018 }
+      ]]} />
     </div>
   );
 }

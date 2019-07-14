@@ -14,9 +14,10 @@ const setup = (anotherProps = {}) => {
     wrapper,
     instance: wrapper.instance(),
     weeks: wrapper.find('.date-picker__week'),
+    getDate: (date) => wrapper.find(`#date-${date.day}-${date.month}-${date.year}`)
   };
 };
-
+const createDate = (day, month, year) => ({ day, month, year })
 describe('DatePicker', () => {
   const { wrapper } = setup();
   it('smoke test', () => {
@@ -24,14 +25,20 @@ describe('DatePicker', () => {
   });
   describe('basic render', () => {
     describe('when pass weeks', () => {
+      const firstDate = createDate(20, 2, 2021)
+      const secondDate = createDate(26, 2, 2021)
       const weeksValue = [
-        [],
-        []
+        [firstDate],
+        [secondDate]
       ]
-      const { weeks } = setup({ weeks: weeksValue })
+      const { weeks, getDate } = setup({ weeks: weeksValue })
       it('renders it', () => {
         expect(weeks).toHaveLength(2)
       });
+      it('render the dates', () => {
+        expect(getDate(firstDate).text()).toEqual(firstDate.day.toString())
+        expect(getDate(secondDate).text()).toEqual(secondDate.day.toString())
+      })
     })
   })
 
