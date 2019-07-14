@@ -1,10 +1,15 @@
 import React from 'react';
 
-const DatePicker = () => {
+const DatePicker = (props) => {
+  const { weeks } = props;
   return (
-    <div>
-     DatePicker 
-    </div>
+    <table>
+      <tbody>
+        {
+          weeks.map(() => <tr className="date-picker__week"></tr>)
+        }
+      </tbody>
+    </table>
   );
 }
 
