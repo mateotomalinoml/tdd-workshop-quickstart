@@ -31,7 +31,8 @@ describe('DatePicker', () => {
         [firstDate],
         [secondDate]
       ]
-      const { weeks, getDate } = setup({ weeks: weeksValue })
+      const onDateClickedSpy = jest.fn()
+      const { weeks, getDate } = setup({ weeks: weeksValue, onDateClicked: onDateClickedSpy })
       it('renders it', () => {
         expect(weeks).toHaveLength(2)
       });
@@ -39,7 +40,15 @@ describe('DatePicker', () => {
         expect(getDate(firstDate).text()).toEqual(firstDate.day.toString())
         expect(getDate(secondDate).text()).toEqual(secondDate.day.toString())
       })
+      describe('when click a date', () => {
+        beforeAll(() => {
+          const dateToClick = getDate(firstDate)
+          dateToClick.simulate('click')
+        })
+        it('call onDateClickedProp with the date', () => {
+          expect(onDateClickedSpy).toBeCalledWith(firstDate)
+        })
+      })
     })
   })
-
 })
