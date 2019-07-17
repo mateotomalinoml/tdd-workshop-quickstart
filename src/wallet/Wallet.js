@@ -7,4 +7,8 @@ export default class Wallet {
         return this.balance
     }
 
+    add(transaction) {
+        this.balance = this.balance + transaction.amount
+    }
+
 }
