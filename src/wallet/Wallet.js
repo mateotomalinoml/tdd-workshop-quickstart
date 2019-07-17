@@ -8,7 +8,15 @@ export default class Wallet {
     }
 
     add(transaction) {
-        this.balance = this.balance + transaction.amount
+        if (transaction.type === "CREDIT") {
+            this.balance = this.balance + transaction.amount
+        } else {
+            const newBalance = this.balance - transaction.amount
+            if (newBalance < 0) {
+                throw new Error('saldo insuficiente')
+            }
+            this.balance = newBalance
+        }
     }
 
 }
