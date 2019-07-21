@@ -15,4 +15,13 @@ describe('Wallet', () => {
             })
         })
     })
+    describe('cuando hacemos una transacción de credito', () => {
+        const wallet = new Wallet(20)
+        beforeAll(() => {
+            wallet.add(20)
+        })
+        it('aumenta el monto de la cuenta', () => {
+            expect(wallet.getBalance()).toEqual(40)
+        })
+    })
 })

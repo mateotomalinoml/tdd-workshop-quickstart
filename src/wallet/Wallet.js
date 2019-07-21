@@ -6,4 +6,7 @@ export default class Wallet {
     getBalance() {
         return this.balance
     }
+    add(amount) {
+        this.balance = this.balance + amount
+    }
 }    
