@@ -18,10 +18,41 @@ describe('Wallet', () => {
     describe('cuando hacemos una transacción de credito', () => {
         const wallet = new Wallet(20)
         beforeAll(() => {
-            wallet.add(20)
+            const creditTransaction = { type: 'CREDIT', amount: 20 }
+            wallet.add(creditTransaction)
         })
         it('aumenta el monto de la cuenta', () => {
             expect(wallet.getBalance()).toEqual(40)
+        })
+    })
+    describe('cuando hacemos una transacion de debito', () => {
+        describe('y nuestro saldo es suficiente', () => {
+            const wallet = new Wallet(200)
+            beforeAll(() => {
+                const debitTransaction = { type: 'DEBIT', amount: 100 }
+                wallet.add(debitTransaction)
+            })
+            it('se resta el monto de nuestra cuenta', () => {
+                expect(wallet.getBalance()).toEqual(100)
+            })
+        })
+        describe('y nuestro saldo no es suficiente', () => {
+            const wallet = new Wallet(200)
+            const debitTransaction = { type: 'DEBIT', amount: 999 }
+            let addTransaction
+            beforeAll(() => {
+                addTransaction = () => wallet.add(debitTransaction);
+            })
+            it('no se resta el saldo de nuestra cuenta', () => {
+                try {
+                    addTransaction();
+                } catch{
+                    expect(wallet.getBalance()).toEqual(200)
+                }
+            })
+            it('lanza una excepcion "insufficient balance"', () => {
+                expect(addTransaction).toThrow('insufficient balance');
+            })
         })
     })
 })

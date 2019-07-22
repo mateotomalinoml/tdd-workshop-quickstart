@@ -6,7 +6,15 @@ export default class Wallet {
     getBalance() {
         return this.balance
     }
-    add(amount) {
-        this.balance = this.balance + amount
+    add(transaction) {
+        if (transaction.type === "CREDIT") {
+            this.balance = this.balance + transaction.amount
+        } else {
+            const newBalance = this.balance - transaction.amount
+            if (newBalance < 0) {
+                throw new Error('insufficient balance')
+            }
+            this.balance = newBalance
+        }
     }
 }    
