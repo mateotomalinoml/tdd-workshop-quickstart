@@ -13,7 +13,7 @@ git clone https://github.com/Guusy/tdd-workshop-quickstart.git
 ```
 2) Instalamos las dependencias
 ```bash
-npm run install
+npm install
 ```
 
 3) Corremos el proyecto para verificar que levante todo ok
